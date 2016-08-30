@@ -47,15 +47,16 @@
             <TabControl>
                 <TabItem Header="Kurs NBP">
                     <DockPanel>
-                        <StackPanel DockPanel.Dock="Top">
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                            <Border  Background="GhostWhite" BorderBrush="Silver" BorderThickness="1" Margin="5,5,5,5" >
+                                <Label Name="lbCurrencyTab"  Width="90" Height="28" Content="{Binding lbCurrencyTabTxt}" />
+                            </Border>
+                            <Separator Margin="20,0,20,0"></Separator>
                             <Button Content="Pobierz" HorizontalAlignment="Right" Margin="5,5,5,5" Width="90" Height="30" Click="Button_Click"></Button>
-                            <Separator Margin="20,0,20,5"></Separator>
                         </StackPanel>
-
-
-                        <ListView HorizontalContentAlignment="Stretch" Name="lvCurrency">
+                        <ListView HorizontalContentAlignment="Stretch" x:Name="lvCurrency">
                             <ListView.View>
-                                <GridView>
+                                <GridView AllowsColumnReorder="True">
                                     <GridViewColumn Header="Waluta" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
                                     <GridViewColumn Header="Przelicznik" Width="Auto" DisplayMemberBinding="{Binding Converter}"/>
                                     <GridViewColumn Header="Kod" Width="Auto"  DisplayMemberBinding="{Binding Code}"/>

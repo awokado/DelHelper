@@ -26,10 +26,12 @@ namespace DelegationHelper
     {
 
         XmlReader xmlReader = null;
+        public string lbCurrencyTabTxt { get; set; } = "uruchamiam";
 
         public MainWindow()
         {
             InitializeComponent();
+            lbCurrencyTab.DataContext = this;
             
             //Console.WriteLine("The version of the currently executing assembly is: {0}",typeof(MainWindow).Assembly.GetName().Version);
             //Console.WriteLine("The version of mscorlib.dll is: {0}", typeof(String).Assembly.GetName().Version);
@@ -78,8 +80,7 @@ namespace DelegationHelper
                 string date;
                 while (xmlReader.Read())
                 {
-                    Console.Write(xmlReader.NodeType.ToString().PadRight(17, '-'));
-                    Console.Write("> ".PadRight(xmlReader.Depth * 3));
+
 
                     switch (xmlReader.NodeType)
                     {
