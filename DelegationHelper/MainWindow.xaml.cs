@@ -24,37 +24,113 @@ namespace DelegationHelper
     /// </summary>
     public partial class MainWindow : Window
     {
-        private XmlReader xmlReader = null;
+
+        XmlReader xmlReader = null;
 
         public MainWindow()
         {
             InitializeComponent();
-            LoadXMLfromWeb("http://www.nbp.pl/kursy/xml/LastA.xml");
+            
             //Console.WriteLine("The version of the currently executing assembly is: {0}",typeof(MainWindow).Assembly.GetName().Version);
-            Console.WriteLine("The version of mscorlib.dll is: {0}", typeof(String).Assembly.GetName().Version);
+            //Console.WriteLine("The version of mscorlib.dll is: {0}", typeof(String).Assembly.GetName().Version);
         }
 
 
-        private void LoadXMLfromWeb(string URL)
+        private  XmlReader LoadXMLfromWeb(string URL)
         {
+            XmlReader reader = null;
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.IgnoreWhitespace = true;
+
             try
             {
-                xmlReader = XmlReader.Create(URL);
+                 reader = XmlReader.Create(URL, settings);
                 //Thread.Sleep(3000);
-
             }
             catch (Exception e)
             {
                 string info = "Exception caught: " + e.Message + "\nSource: "  + e.Source;
                 MessageBox.Show(info, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                
             }
             finally
             {
-                if (xmlReader != null) { Console.WriteLine("sukces"); }
+                if (reader != null) { Console.WriteLine("sukces"); }
                 else { Console.WriteLine("porażka"); }
             }
+           
+            return reader;
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            xmlReader = LoadXMLfromWeb("http://www.nbp.pl/kursy/xml/LastA.xml");
+            while (xmlReader.Read())
+            {
+
+                Console.Write(new string(' ', xmlReader.Depth * 2)); // Write indentation
+                Console.WriteLine(xmlReader.NodeType);
+                //xmlReader.ReadStartElement("tabela_kursow");
+               
+
+                CurrencyTable currencyTable = new CurrencyTable();
+                Currency currency;
+                string number;
+                string date;
+                while (xmlReader.Read())
+                {
+                    Console.Write(xmlReader.NodeType.ToString().PadRight(17, '-'));
+                    Console.Write("> ".PadRight(xmlReader.Depth * 3));
+
+                    switch (xmlReader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            switch (xmlReader.Name)
+                            {
+                                case "numer_tabeli":
+                                    {
+                                        xmlReader.Read();
+                                        number = xmlReader.Value;
+                                        currencyTable.number = number;
+                                        break;
+                                    }
+                                case "data_publikacji":
+                                    {
+                                        xmlReader.Read();
+                                        date = xmlReader.Value;
+                                        currencyTable.date = date;
+                                        break;
+                                    }
+                                case "pozycja":
+                                    {
+                                        currency = new Currency();
+                                        xmlReader.ReadStartElement("pozycja");
+                                        currency.Name = xmlReader.ReadElementContentAsString("nazwa_waluty", "");
+                                        currency.Converter = xmlReader.ReadElementContentAsString("przelicznik", "");
+                                        currency.Code = xmlReader.ReadElementContentAsString("kod_waluty", "");
+                                        currency.ExchangeRate = xmlReader.ReadElementContentAsString("kurs_sredni", "");
+                                        xmlReader.ReadEndElement();
+                                        currencyTable.items.Add(currency);
+                                        break;
+                                    }
+                                default: break;
+                            }break;
+
+
+                        case XmlNodeType.EndElement: break;
+                        case XmlNodeType.Text:
+                        case XmlNodeType.CDATA:
+                        case XmlNodeType.Comment:
+                        case XmlNodeType.XmlDeclaration: break;
+                        case XmlNodeType.DocumentType: break;
+                        default: break;
+                    }
+                }
+
+                
+                lvCurrency.ItemsSource = currencyTable.items;
+
+
+            }
         }
     }
 }
