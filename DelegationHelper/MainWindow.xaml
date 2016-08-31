@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:DelegationHelper"
         mc:Ignorable="d"
         Title="Delegation Helper" Height="650" Width="525">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom" MaxHeight="50">
             <StatusBar.ItemsPanel>
