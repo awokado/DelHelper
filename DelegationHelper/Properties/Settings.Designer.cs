@@ -58,5 +58,17 @@ namespace DelegationHelper.Properties {
                 this["B"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("150")]
+        public byte A {
+            get {
+                return ((byte)(this["A"]));
+            }
+            set {
+                this["A"] = value;
+            }
+        }
     }
 }

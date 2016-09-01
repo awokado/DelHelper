@@ -4,12 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DelegationHelper"
+        xmlns:vm="clr-namespace:DelegationHelper.ViewModel"
         mc:Ignorable="d"
         Title="Delegation Helper" Height="650" Width="525">
-    <Window.DataContext>
-        <local:MainWindowViewModel />
-    </Window.DataContext>
-    <DockPanel>
+    <Window.Resources>
+        <vm:ColorEdit x:Key="colorEdit"/>
+        <vm:ByteToDoubleConverter x:Key="conversionByteToDouble"/>
+        <vm:ColorToSolidColorBrushConverter x:Key="colorToSolidColorBrushConverter"/>
+        <vm:RGBToSolidColorBrushConverter x:Key="rgbToSolidColorBrushConverter"/>
+    </Window.Resources>
+    <DockPanel DataContext="{StaticResource colorEdit}">
         <StatusBar DockPanel.Dock="Bottom" MaxHeight="50">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -69,7 +73,45 @@
                         </ListView>
                     </DockPanel>
                 </TabItem>
-                <TabItem Header="TBD" />
+                <TabItem Header="TBD">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <Rectangle Margin="5" Height="150">
+                            <Rectangle.Fill>
+                                <MultiBinding Mode="OneWay" Converter="{StaticResource rgbToSolidColorBrushConverter}">
+                                    <Binding Path="A" />
+                                    <Binding Path="R" />
+                                    <Binding Path="G" />
+                                    <Binding Path="B" />
+                                </MultiBinding>
+                            </Rectangle.Fill>
+                  
+                         </Rectangle>
+                        <DockPanel >
+                            <Label Content="A" DockPanel.Dock="Left"/>
+                            <TextBlock Text="{Binding ElementName=sliderA, Path=Value}" DockPanel.Dock="Right"/>
+                            <Slider x:Name="sliderA" Maximum="255" Value="{Binding A, Mode=TwoWay, Converter={StaticResource conversionByteToDouble}}" Height="18" Margin="10,0,10,5"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Label Content="R" DockPanel.Dock="Left"/>
+                            <TextBlock Text="{Binding ElementName=sliderR, Path=Value}" DockPanel.Dock="Right"/>
+                            <Slider x:Name="sliderR" Maximum="255" Value="{Binding R, Mode=TwoWay, Converter={StaticResource conversionByteToDouble}}" Height="18" Margin="10,0,10,5"/>
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label Content="G" DockPanel.Dock="Left"/>
+                            <TextBlock Text="{Binding ElementName=sliderG, Path=Value}" DockPanel.Dock="Right"/>
+                            <Slider x:Name="sliderG" Maximum="255" Value="{Binding G, Mode=TwoWay, Converter={StaticResource conversionByteToDouble}}" Height="18" Margin="10,0,10,5"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Label Content="B" DockPanel.Dock="Left"/>
+                            <TextBlock Text="{Binding ElementName=sliderB, Path=Value}" DockPanel.Dock="Right"/>
+                            <Slider x:Name="sliderB" Maximum="255" Value="{Binding B, Mode=TwoWay}" Height="18" Margin="10,0,10,5"/>
+                        </DockPanel>
+
+                    </StackPanel>
+                </TabItem>
                 <TabItem Header="Developer" />
             </TabControl>
 
