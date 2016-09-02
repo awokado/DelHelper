@@ -8,12 +8,13 @@
         mc:Ignorable="d"
         Title="Delegation Helper" Height="650" Width="525">
     <Window.Resources>
+        <vm:CurrencyDisplay x:Key="currencyDisplay"/>
         <vm:ColorEdit x:Key="colorEdit"/>
         <vm:ByteToDoubleConverter x:Key="conversionByteToDouble"/>
         <vm:ColorToSolidColorBrushConverter x:Key="colorToSolidColorBrushConverter"/>
         <vm:RGBToSolidColorBrushConverter x:Key="rgbToSolidColorBrushConverter"/>
     </Window.Resources>
-    <DockPanel DataContext="{StaticResource colorEdit}">
+    <DockPanel >
         <StatusBar DockPanel.Dock="Bottom" MaxHeight="50">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -61,7 +62,7 @@
                             <Separator Margin="20,0,20,0"></Separator>
                             <Button Content="Pobierz" HorizontalAlignment="Right" Margin="5,5,5,5" Width="90" Height="30" Click="Button_Click"></Button>
                         </StackPanel>
-                        <ListView HorizontalContentAlignment="Stretch" x:Name="lvCurrency">
+                        <ListView HorizontalContentAlignment="Stretch" x:Name="lvCurrency" ItemsSource="{Binding test}">
                             <ListView.View>
                                 <GridView AllowsColumnReorder="True">
                                     <GridViewColumn Header="Waluta" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
@@ -73,7 +74,7 @@
                         </ListView>
                     </DockPanel>
                 </TabItem>
-                <TabItem Header="TBD">
+                <TabItem Header="TBD" DataContext="{StaticResource colorEdit}">
                     <StackPanel Orientation="Vertical" Margin="5">
                         <Rectangle Margin="5" Height="150">
                             <Rectangle.Fill>
@@ -112,7 +113,27 @@
 
                     </StackPanel>
                 </TabItem>
-                <TabItem Header="Developer" />
+                <TabItem Header="Currency" DataContext="{StaticResource currencyDisplay}">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                            <Border  Background="GhostWhite" BorderBrush="Silver" BorderThickness="1" Margin="5,5,5,5" >
+                                <Label Name="lbCurrencyInfo"  Width="90" Height="28" Content="{Binding lbCurrencyTabTxt}" />
+                            </Border>
+                            <Separator Margin="20,0,20,0"></Separator>
+                            <Button Content="Pobierz" HorizontalAlignment="Right" Margin="5,5,5,5" Width="90" Height="30" Click="Button_Click"></Button>
+                        </StackPanel>
+                        <ListView HorizontalContentAlignment="Stretch"  ItemsSource="{Binding currencyTable, Mode=OneWay}">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="True">
+                                    <GridViewColumn Header="Waluta" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
+                                    <GridViewColumn Header="Przelicznik" Width="Auto" DisplayMemberBinding="{Binding Converter}"/>
+                                    <GridViewColumn Header="Kod" Width="Auto"  DisplayMemberBinding="{Binding Code}"/>
+                                    <GridViewColumn Header="Kurs" Width="Auto" DisplayMemberBinding="{Binding ExchangeRate}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                </TabItem>
             </TabControl>
 
         </Grid>

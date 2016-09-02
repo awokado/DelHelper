@@ -55,8 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\NBPTableDownloader.cs" />
     <Compile Include="ViewModel\ColorEdit.cs" />
     <Compile Include="ViewModel\Converter.cs" />
+    <Compile Include="ViewModel\CurrencyDisplay.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
