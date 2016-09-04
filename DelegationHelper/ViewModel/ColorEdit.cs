@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace DelegationHelper.ViewModel 
@@ -44,6 +45,17 @@ namespace DelegationHelper.ViewModel
         public Color Color
         {
             get { return colors.ToColor(); }
+        }
+
+        private ICommand resetCommand;
+
+        public ICommand Reset
+        {
+            get
+            {
+                if (resetCommand == null) resetCommand = new ResetCommand(this);  // dummy singletone :)
+                return resetCommand;
+            }
         }
 
 

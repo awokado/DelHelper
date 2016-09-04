@@ -14,6 +14,14 @@
         <vm:ColorToSolidColorBrushConverter x:Key="colorToSolidColorBrushConverter"/>
         <vm:RGBToSolidColorBrushConverter x:Key="rgbToSolidColorBrushConverter"/>
     </Window.Resources>
+    <Window.DataContext>
+        <StaticResource ResourceKey="colorEdit">
+        </StaticResource>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="R" Command="{Binding Reset}"/>
+        <MouseBinding Gesture="Ctrl+MiddleClick" Command="{Binding Reset}" />
+    </Window.InputBindings>
     <DockPanel >
         <StatusBar DockPanel.Dock="Bottom" MaxHeight="50">
             <StatusBar.ItemsPanel>
@@ -53,28 +61,7 @@
         </StatusBar>
         <Grid>
             <TabControl>
-                <TabItem Header="Kurs NBP">
-                    <DockPanel>
-                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                            <Border  Background="GhostWhite" BorderBrush="Silver" BorderThickness="1" Margin="5,5,5,5" >
-                                <Label Name="lbCurrencyTab"  Width="90" Height="28" Content="{Binding lbCurrencyTabTxt}" />
-                            </Border>
-                            <Separator Margin="20,0,20,0"></Separator>
-                            <Button Content="Pobierz" HorizontalAlignment="Right" Margin="5,5,5,5" Width="90" Height="30" Click="Button_Click"></Button>
-                        </StackPanel>
-                        <ListView HorizontalContentAlignment="Stretch" x:Name="lvCurrency" ItemsSource="{Binding test}">
-                            <ListView.View>
-                                <GridView AllowsColumnReorder="True">
-                                    <GridViewColumn Header="Waluta" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
-                                    <GridViewColumn Header="Przelicznik" Width="Auto" DisplayMemberBinding="{Binding Converter}"/>
-                                    <GridViewColumn Header="Kod" Width="Auto"  DisplayMemberBinding="{Binding Code}"/>
-                                    <GridViewColumn Header="Kurs" Width="Auto" DisplayMemberBinding="{Binding ExchangeRate}"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </DockPanel>
-                </TabItem>
-                <TabItem Header="TBD" DataContext="{StaticResource colorEdit}">
+                <TabItem Header="Colors" >
                     <StackPanel Orientation="Vertical" Margin="5">
                         <Rectangle Margin="5" Height="150">
                             <Rectangle.Fill>
@@ -110,7 +97,13 @@
                             <TextBlock Text="{Binding ElementName=sliderB, Path=Value}" DockPanel.Dock="Right"/>
                             <Slider x:Name="sliderB" Maximum="255" Value="{Binding B, Mode=TwoWay}" Height="18" Margin="10,0,10,5"/>
                         </DockPanel>
+                        <DockPanel>
 
+                            <Button Content="Reset" DockPanel.Dock="Right" Height="30" Width="70" Margin="10,0,20,5" 
+                                    Command="{Binding Reset}">
+                            </Button>
+                            <Grid/>
+                        </DockPanel>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Currency" DataContext="{StaticResource currencyDisplay}">
@@ -120,7 +113,7 @@
                                 <Label Name="lbCurrencyInfo"  Width="90" Height="28" Content="{Binding lbCurrencyTabTxt}" />
                             </Border>
                             <Separator Margin="20,0,20,0"></Separator>
-                            <Button Content="Pobierz" HorizontalAlignment="Right" Margin="5,5,5,5" Width="90" Height="30" Click="Button_Click"></Button>
+                            <Button Content="Pobierz" HorizontalAlignment="Right" Margin="5,5,5,5" Width="90" Height="30"></Button>
                         </StackPanel>
                         <ListView HorizontalContentAlignment="Stretch"  ItemsSource="{Binding currencyTable, Mode=OneWay}">
                             <ListView.View>
