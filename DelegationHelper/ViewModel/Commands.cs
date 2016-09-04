@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DelegationHelper.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace DelegationHelper.ViewModel
 {
     public class ResetCommand : ICommand
     {
-        private readonly ColorEdit viewModel;
+        private readonly ColorEdit _viewModel;
         public event EventHandler CanExecuteChanged
         {
             add
@@ -22,27 +23,57 @@ namespace DelegationHelper.ViewModel
             }
         }
 
-
-
         public ResetCommand(ColorEdit viewModel)
         {
             if (viewModel == null) throw new ArgumentNullException("viewModel");
-            this.viewModel = viewModel;
+            this._viewModel = viewModel;
         }
 
         public bool CanExecute(object parameter)
         {
 
-            return (viewModel.A != 0) || (viewModel.R != 0) || (viewModel.G != 0) || (viewModel.B != 0) ;
+            return (_viewModel.A != 0) || (_viewModel.R != 0) || (_viewModel.G != 0) || (_viewModel.B != 0) ;
         }
 
         public void Execute(object parameter)
         {
             System.Console.WriteLine("reset");
-            viewModel.A = 0;
-            viewModel.R = 0;
-            viewModel.G = 0;
-            viewModel.B = 0;
+            _viewModel.A = 0;
+            _viewModel.R = 0;
+            _viewModel.G = 0;
+            _viewModel.B = 0;
+        }
+    }
+
+    public class SaveCommand :ICommand
+    {
+        private readonly ColorEdit _viewModel;
+        public SaveCommand(ColorEdit _viewModel)
+        {
+            if (_viewModel == null) throw new ArgumentNullException(nameof(_viewModel));
+            this._viewModel = _viewModel;
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
+                CommandManager.RequerySuggested -= value;
+            }
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Execute(object parameter)
+        {
+            Settings.Save(_viewModel.Color);
         }
     }
 }

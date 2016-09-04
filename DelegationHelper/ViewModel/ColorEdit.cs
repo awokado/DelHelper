@@ -21,6 +21,7 @@ namespace DelegationHelper.ViewModel
             get { return colors.A; }
             set { colors.A = value; onPropertyChanged("A", "Color"); }
         }
+
         public byte R
         {
             get { return colors.R; }
@@ -37,17 +38,24 @@ namespace DelegationHelper.ViewModel
             set { colors.B = value; onPropertyChanged("B", "Color"); }
         }
 
-        public void Save()
-        {
-            Settings.Save(colors);
-        }
+
     
-        public Color Color
+        public Model.Colors Color
         {
-            get { return colors.ToColor(); }
+            get { return colors; }
         }
 
         private ICommand resetCommand;
+        private ICommand saveCommand;
+
+        public ICommand Save
+        {
+            get
+            {
+                if (saveCommand == null) saveCommand = new SaveCommand(this);// dummy singletone :)
+                return saveCommand;
+            }
+        }
 
         public ICommand Reset
         {

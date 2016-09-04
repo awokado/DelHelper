@@ -72,8 +72,7 @@
                                     <Binding Path="B" />
                                 </MultiBinding>
                             </Rectangle.Fill>
-                  
-                         </Rectangle>
+                        </Rectangle>
                         <DockPanel >
                             <Label Content="A" DockPanel.Dock="Left"/>
                             <TextBlock Text="{Binding ElementName=sliderA, Path=Value}" DockPanel.Dock="Right"/>

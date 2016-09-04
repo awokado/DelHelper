@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 /// <summary>
 /// DAL - data access layer
@@ -22,7 +23,7 @@ namespace DelegationHelper.Model
             Properties.Settings settings = Properties.Settings.Default;
             return new Colors(settings.R, settings.G, settings.B, settings.A);
         }
-        public static void Save(Colors color)
+        public static void Save(Model.Colors color)
         {
             Properties.Settings settings = Properties.Settings.Default;
             settings.R = color.R;
@@ -31,5 +32,6 @@ namespace DelegationHelper.Model
             settings.A = color.A;
             settings.Save();
         }
+
     }
 }
