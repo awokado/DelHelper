@@ -44,6 +44,36 @@ namespace DelegationHelper.ViewModel
             _viewModel.B = 0;
         }
     }
+    public class CloseCommand : ICommand
+    {
+        private readonly ColorEdit _viewModel;
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
+                CommandManager.RequerySuggested -= value;
+            }
+        }
+
+        public CloseCommand(ColorEdit viewModel)
+        {
+            if (viewModel == null) throw new ArgumentNullException("viewModel");
+            this._viewModel = viewModel;
+        }
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            App.Current.MainWindow.Close();
+        }
+    }
 
     public class SaveCommand :ICommand
     {
@@ -68,7 +98,7 @@ namespace DelegationHelper.ViewModel
 
         public bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void Execute(object parameter)

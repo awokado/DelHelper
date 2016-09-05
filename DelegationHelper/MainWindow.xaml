@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DelegationHelper"
         xmlns:vm="clr-namespace:DelegationHelper.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="Delegation Helper" Height="650" Width="525">
     <Window.Resources>
@@ -21,7 +22,13 @@
     <Window.InputBindings>
         <KeyBinding Key="R" Command="{Binding Reset}"/>
         <MouseBinding Gesture="Ctrl+MiddleClick" Command="{Binding Reset}" />
+        <KeyBinding Key="Esc" Command="{Binding Close}"/>
     </Window.InputBindings>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding Save}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <DockPanel >
         <StatusBar DockPanel.Dock="Bottom" MaxHeight="50">
             <StatusBar.ItemsPanel>

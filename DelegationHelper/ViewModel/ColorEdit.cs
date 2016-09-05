@@ -47,7 +47,16 @@ namespace DelegationHelper.ViewModel
 
         private ICommand resetCommand;
         private ICommand saveCommand;
+        private ICommand closeCommand;
 
+        public ICommand Close
+        {
+            get
+            {
+                if (closeCommand == null) closeCommand = new CloseCommand(this);
+                return closeCommand;
+            }
+        }
         public ICommand Save
         {
             get
