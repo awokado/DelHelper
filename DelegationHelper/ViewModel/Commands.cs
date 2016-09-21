@@ -44,6 +44,9 @@ namespace DelegationHelper.ViewModel
             _viewModel.B = 0;
         }
     }
+
+
+
     public class CloseCommand : ICommand
     {
         private readonly ColorEdit _viewModel;

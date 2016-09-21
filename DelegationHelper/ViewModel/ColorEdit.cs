@@ -96,10 +96,7 @@ namespace DelegationHelper.ViewModel
                 R = colors.R,
                 G = colors.G,
                 B = colors.B
-
             };
         }
-
-
     }
 }

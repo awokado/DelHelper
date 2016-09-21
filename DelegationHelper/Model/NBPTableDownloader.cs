@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
@@ -18,7 +19,8 @@ namespace DelegationHelper.Model
         public static CurrencyTable getNBPCurrencyTable()
         {
             xmlReader = LoadXMLfromWeb("http://www.nbp.pl/kursy/xml/LastA.xml");
-            Console.WriteLine("--2--------------------------------------------------------------");
+            
+            //Console.WriteLine("--2--------------------------------------------------------------");
 
             CurrencyTable currencyTable = new CurrencyTable();
             Currency currency;
@@ -32,8 +34,6 @@ namespace DelegationHelper.Model
                 string date;
                 while (xmlReader.Read())
                 {
-
-
                     switch (xmlReader.NodeType)
                     {
                         case XmlNodeType.Element:

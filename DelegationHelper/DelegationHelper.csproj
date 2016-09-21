@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\NBPTableDownloader.cs" />
+    <Compile Include="Behaviors.cs" />
     <Compile Include="ViewModel\ColorEdit.cs" />
     <Compile Include="ViewModel\Commands.cs" />
     <Compile Include="ViewModel\Converter.cs" />

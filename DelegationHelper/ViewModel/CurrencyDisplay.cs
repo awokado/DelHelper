@@ -10,14 +10,22 @@ namespace DelegationHelper.ViewModel
 {
     class CurrencyDisplay : INotifyPropertyChanged
     {
-        private readonly CurrencyTable curTable = NBPTableDownloader.getNBPCurrencyTable();
+        private readonly CurrencyTable todaysCurrTable = NBPTableDownloader.getNBPCurrencyTable();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public List<Currency> currencyTable
+        public List<Currency> todaysCurrencyTable
         {
-            get { Console.WriteLine("--1--------------------------------------------------------------");  return curTable.items; }
+            get { Console.WriteLine("--1--------------------------------------------------------------");  return todaysCurrTable.items; }
+        }
+
+        /// <summary>
+        /// Returns date of downloaded currency table
+        /// </summary>
+        public String todaysCurrencyTableDate
+        {
+            get { return todaysCurrTable.date; }
         }
 
         private void onPropertyChanged(params string[] propertyNames)
