@@ -10,23 +10,46 @@ namespace DelegationHelper.ViewModel
 {
     class CurrencyDisplay : INotifyPropertyChanged
     {
-        private readonly CurrencyTable todaysCurrTable = NBPTableDownloader.getNBPCurrencyTable();
+        private  CurrencyTable todaysCurrTable = null;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public List<Currency> todaysCurrencyTable
+
+
+        public CurrencyDisplay()
         {
-            get { Console.WriteLine("--1--------------------------------------------------------------");  return todaysCurrTable.items; }
+            Initializer();
         }
 
-        /// <summary>
-        /// Returns date of downloaded currency table
-        /// </summary>
-        public String todaysCurrencyTableDate
+        private async void Initializer()
+        {
+            TodaysCurrTable = await NBPTableDownloader.getNBPCurrencyTable();
+
+        }
+
+
+        public CurrencyTable TodaysCurrTable
+        {
+            get { return todaysCurrTable; }
+            set { todaysCurrTable = value; onPropertyChanged("ActualCurrencyTable"); onPropertyChanged("ActualCurrencyTableDate"); }
+        }
+
+
+        public List<Currency> ActualCurrencyTable
+        {
+            get { return todaysCurrTable.items; }
+
+        }
+        public String ActualCurrencyTableDate
         {
             get { return todaysCurrTable.date; }
         }
+
+
+
+
+
 
         private void onPropertyChanged(params string[] propertyNames)
         {

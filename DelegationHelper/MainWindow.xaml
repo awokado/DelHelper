@@ -72,6 +72,35 @@
         </StatusBar>
         <Grid>
             <TabControl>
+                
+                <TabItem Header="Currency" DataContext="{StaticResource currencyDisplay}">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+
+                            <Button Content="&lt;&lt;" HorizontalAlignment="Right" Margin="5,5,5,5"  FontSize="16" FontFamily="Consolas"/>
+                            <Button Content="&gt;&gt;" HorizontalAlignment="Right" Margin="5,5,5,5" FontSize="16" FontFamily="Consolas"  />
+                            <Button Content="Refresh" HorizontalAlignment="Right" Margin="5,5,5,5"   />
+                        </StackPanel>
+                        <TabControl>
+                            <TabItem Header="{Binding Path=ActualCurrencyTableDate}">
+                                <DockPanel>
+
+                                    <ListView HorizontalContentAlignment="Stretch"  ItemsSource="{Binding ActualCurrencyTable, Mode=OneWay}">
+                                        <ListView.View>
+                                            <GridView AllowsColumnReorder="True">
+                                                <GridViewColumn Header="Waluta" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
+                                                <GridViewColumn Header="Przelicznik" Width="Auto" DisplayMemberBinding="{Binding Converter}"/>
+                                                <GridViewColumn Header="Kod" Width="Auto"  DisplayMemberBinding="{Binding Code}"/>
+                                                <GridViewColumn Header="Kurs" Width="Auto" DisplayMemberBinding="{Binding ExchangeRate}"/>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </DockPanel>
+                            </TabItem>
+                        </TabControl>
+                    </DockPanel>
+                    
+                </TabItem>
                 <TabItem Header="Colors" >
                     <StackPanel Orientation="Vertical" Margin="5">
                         <Rectangle Margin="5" Height="150">
@@ -89,7 +118,7 @@
                             <TextBlock Text="{Binding ElementName=sliderA, Path=Value}" DockPanel.Dock="Right"/>
                             <Slider x:Name="sliderA" Maximum="255" Value="{Binding A, Mode=TwoWay, Converter={StaticResource conversionByteToDouble}}" Height="18" Margin="10,0,10,5"/>
                         </DockPanel>
-                        
+
                         <DockPanel>
                             <Label Content="R" DockPanel.Dock="Left"/>
                             <TextBlock Text="{Binding ElementName=sliderR, Path=Value}" DockPanel.Dock="Right"/>
@@ -101,7 +130,7 @@
                             <TextBlock Text="{Binding ElementName=sliderG, Path=Value}" DockPanel.Dock="Right"/>
                             <Slider x:Name="sliderG" Maximum="255" Value="{Binding G, Mode=TwoWay, Converter={StaticResource conversionByteToDouble}}" Height="18" Margin="10,0,10,5"/>
                         </DockPanel>
-                        
+
                         <DockPanel>
                             <Label Content="B" DockPanel.Dock="Left"/>
                             <TextBlock Text="{Binding ElementName=sliderB, Path=Value}" DockPanel.Dock="Right"/>
@@ -117,34 +146,6 @@
                             <Grid/>
                         </DockPanel>
                     </StackPanel>
-                </TabItem>
-                <TabItem Header="Currency" DataContext="{StaticResource currencyDisplay}">
-                    <DockPanel>
-                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-
-                            <Button Content="&lt;&lt;" HorizontalAlignment="Right" Margin="5,5,5,5"  FontSize="16" FontFamily="Consolas"/>
-                            <Button Content="&gt;&gt;" HorizontalAlignment="Right" Margin="5,5,5,5" FontSize="16" FontFamily="Consolas"  />
-                            <Button Content="Refresh" HorizontalAlignment="Right" Margin="5,5,5,5"   />
-                        </StackPanel>
-                        <TabControl>
-                            <TabItem Header="{Binding Path=todaysCurrencyTableDate}">
-                                <DockPanel>
-
-                                    <ListView HorizontalContentAlignment="Stretch"  ItemsSource="{Binding todaysCurrencyTable, Mode=OneWay}">
-                                        <ListView.View>
-                                            <GridView AllowsColumnReorder="True">
-                                                <GridViewColumn Header="Waluta" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
-                                                <GridViewColumn Header="Przelicznik" Width="Auto" DisplayMemberBinding="{Binding Converter}"/>
-                                                <GridViewColumn Header="Kod" Width="Auto"  DisplayMemberBinding="{Binding Code}"/>
-                                                <GridViewColumn Header="Kurs" Width="Auto" DisplayMemberBinding="{Binding ExchangeRate}"/>
-                                            </GridView>
-                                        </ListView.View>
-                                    </ListView>
-                                </DockPanel>
-                            </TabItem>
-                        </TabControl>
-                    </DockPanel>
-                    
                 </TabItem>
             </TabControl>
 

@@ -10,6 +10,5 @@ namespace DelegationHelper
     {
         public List<Currency> items = new List<Currency>();
         public string number, date;
-
     }
 }
