@@ -57,8 +57,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Engine.cs" />
+    <Compile Include="Model\MyStaticService.cs" />
     <Compile Include="Model\NBPTableDownloader.cs" />
     <Compile Include="Behaviors.cs" />
+    <Compile Include="Model\NotifyTaskCompletion.cs" />
     <Compile Include="ViewModel\ColorEdit.cs" />
     <Compile Include="ViewModel\Commands.cs" />
     <Compile Include="ViewModel\Converter.cs" />

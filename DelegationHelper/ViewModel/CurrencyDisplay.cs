@@ -10,32 +10,37 @@ namespace DelegationHelper.ViewModel
 {
     class CurrencyDisplay : INotifyPropertyChanged
     {
-        private  CurrencyTable todaysCurrTable = null;
-
+        private CurrencyTable todaysCurrTable = null;
+        private Engine engine = null;
         public event PropertyChangedEventHandler PropertyChanged;
-
-
-
+        public NotifyTaskCompletion<CurrencyTable> UrlByteCount { get; private set; }
 
         public CurrencyDisplay()
         {
+            engine = Engine.getEngine();
             Initializer();
         }
 
-        private async void Initializer()
-        {
-            TodaysCurrTable = await NBPTableDownloader.getNBPCurrencyTable();
 
+        private  void Initializer()
+        {
+            //TodaysCurrTable = await NBPTableDownloader.getNBPCurrencyTable();
+            UrlByteCount = new NotifyTaskCompletion<CurrencyTable>(NBPTableDownloader.getNBPCurrencyTable());
+            TodaysCurrTable = UrlByteCount.Result;
         }
 
 
+        //-----------------------------------------------------------------------------//
         public CurrencyTable TodaysCurrTable
         {
             get { return todaysCurrTable; }
-            set { todaysCurrTable = value; onPropertyChanged("ActualCurrencyTable"); onPropertyChanged("ActualCurrencyTableDate"); }
+            set
+            {
+                todaysCurrTable = value;
+                onPropertyChanged("ActualCurrencyTable");
+                onPropertyChanged("ActualCurrencyTableDate");
+            }
         }
-
-
         public List<Currency> ActualCurrencyTable
         {
             get { return todaysCurrTable.items; }
@@ -47,15 +52,12 @@ namespace DelegationHelper.ViewModel
         }
 
 
-
-
-
-
+        //-----------------------------------------------------------------------------//
         private void onPropertyChanged(params string[] propertyNames)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                foreach(string propertyName in propertyNames)
+                foreach (string propertyName in propertyNames)
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
                 }

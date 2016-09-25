@@ -80,6 +80,7 @@
                             <Button Content="&lt;&lt;" HorizontalAlignment="Right" Margin="5,5,5,5"  FontSize="16" FontFamily="Consolas"/>
                             <Button Content="&gt;&gt;" HorizontalAlignment="Right" Margin="5,5,5,5" FontSize="16" FontFamily="Consolas"  />
                             <Button Content="Refresh" HorizontalAlignment="Right" Margin="5,5,5,5"   />
+                            <Label Content="Loading..." Visibility="{Binding UrlByteCount.IsNotCompleted}"/>
                         </StackPanel>
                         <TabControl>
                             <TabItem Header="{Binding Path=ActualCurrencyTableDate}">

@@ -81,8 +81,6 @@ namespace DelegationHelper.Model
                     default: break;
                 }
             }
-
-
             Console.WriteLine(currencyTable == null);
             return currencyTable;
         }
@@ -91,7 +89,7 @@ namespace DelegationHelper.Model
 
         private static async Task<XmlReader> LoadXMLfromWeb(string URL)
         {
-            await Task.Delay(5000);
+            //await Task.Delay(2000);
             var httpReader = new HttpClient();
             Stream dataStream = await httpReader.GetStreamAsync(URL);
 
