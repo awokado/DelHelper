@@ -24,37 +24,11 @@ namespace DelegationHelper
     /// </summary>
     public partial class MainWindow : Window
     {
-        private XmlReader xmlReader = null;
 
         public MainWindow()
         {
             InitializeComponent();
-            LoadXMLfromWeb("http://www.nbp.pl/kursy/xml/LastA.xml");
-            //Console.WriteLine("The version of the currently executing assembly is: {0}",typeof(MainWindow).Assembly.GetName().Version);
-            Console.WriteLine("The version of mscorlib.dll is: {0}", typeof(String).Assembly.GetName().Version);
         }
 
-
-        private void LoadXMLfromWeb(string URL)
-        {
-            try
-            {
-                xmlReader = XmlReader.Create(URL);
-                //Thread.Sleep(3000);
-
-            }
-            catch (Exception e)
-            {
-                string info = "Exception caught: " + e.Message + "\nSource: "  + e.Source;
-                MessageBox.Show(info, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                
-            }
-            finally
-            {
-                if (xmlReader != null) { Console.WriteLine("sukces"); }
-                else { Console.WriteLine("porażka"); }
-            }
-
-        }
     }
 }
