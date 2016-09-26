@@ -11,13 +11,13 @@ namespace DelegationHelper.ViewModel
     class CurrencyDisplay : INotifyPropertyChanged
     {
         private CurrencyTable todaysCurrTable = new CurrencyTable();//dummy
-        private Engine engine = null;
+        private ModelMaster modelMaster = null;
         public event PropertyChangedEventHandler PropertyChanged;
         public NotifyTaskCompletion<CurrencyTable> UrlByteCount { get; private set; }
 
         public CurrencyDisplay()
         {
-            engine = Engine.GetInstance;
+            modelMaster = ModelMaster.GetInstance;
             Initializer();
         }
 
@@ -48,6 +48,18 @@ namespace DelegationHelper.ViewModel
         public String ActualCurrencyTableDate
         {
             get { return todaysCurrTable.date; }
+        }
+
+
+
+        public List<Currency> LatestNBPCurrTabelAContent
+        {
+            get { modelMaster.LatestNBPCurrTabelA; }
+        }
+
+        public List<Currency> LatestNBPCurrTabelADate
+        {
+            get { throw NotImplementedException; }
         }
 
 

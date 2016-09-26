@@ -82,6 +82,8 @@
                             <Button Content="Refresh" HorizontalAlignment="Right" Margin="5,5,5,5"   />
                             <Label Content="Loading..." Visibility="{Binding UrlByteCount.IsNotCompleted}"/>
                         </StackPanel>
+                        <StackPanel DockPanel.Dock="Bottom" Background="#FFD4C2C2" Height="50"/>
+
                         <TabControl>
                             <TabItem Header="{Binding Path=ActualCurrencyTableDate}">
                                 <DockPanel>
@@ -147,6 +149,35 @@
                             <Grid/>
                         </DockPanel>
                     </StackPanel>
+                </TabItem>
+                <TabItem Header="Currency2" DataContext="{StaticResource currencyDisplay}">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+
+                            <Button Content="&lt;&lt;" HorizontalAlignment="Right" Margin="5,5,5,5"  FontSize="16" FontFamily="Consolas"/>
+                            <Button Content="&gt;&gt;" HorizontalAlignment="Right" Margin="5,5,5,5" FontSize="16" FontFamily="Consolas"  />
+                            <Button Content="Refresh" HorizontalAlignment="Right" Margin="5,5,5,5"   />
+                            <Label Content="Loading..." Visibility="{Binding UrlByteCount.IsNotCompleted}"/>
+                        </StackPanel>
+                        <TabControl>
+                            <TabItem Header="{Binding Path=ActualCurrencyTableDate}">
+                                <DockPanel>
+
+                                    <ListView HorizontalContentAlignment="Stretch"  ItemsSource="{Binding ActualCurrencyTable, Mode=OneWay}">
+                                        <ListView.View>
+                                            <GridView AllowsColumnReorder="True">
+                                                <GridViewColumn Header="Waluta" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
+                                                <GridViewColumn Header="Przelicznik" Width="Auto" DisplayMemberBinding="{Binding Converter}"/>
+                                                <GridViewColumn Header="Kod" Width="Auto"  DisplayMemberBinding="{Binding Code}"/>
+                                                <GridViewColumn Header="Kurs" Width="Auto" DisplayMemberBinding="{Binding ExchangeRate}"/>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </DockPanel>
+                            </TabItem>
+                        </TabControl>
+                    </DockPanel>
+
                 </TabItem>
             </TabControl>
 
