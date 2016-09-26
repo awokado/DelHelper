@@ -89,7 +89,7 @@ namespace DelegationHelper.Model
 
         private static async Task<XmlReader> LoadXMLfromWeb(string URL)
         {
-            //await Task.Delay(2000);
+            await Task.Delay(2000);
             var httpReader = new HttpClient();
             Stream dataStream = await httpReader.GetStreamAsync(URL);
 

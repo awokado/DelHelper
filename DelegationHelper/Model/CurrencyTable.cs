@@ -10,12 +10,9 @@ namespace DelegationHelper
     class CurrencyTable
     {
         public List<Currency> items = new List<Currency>();
-        public string number, date;
-
-        public static implicit operator CurrencyTable(NotifyTaskCompletion<CurrencyTable> v)
-        {
-            throw new NotImplementedException();
-        }
+        public string number = "00000";
+        public string date = "00.00.000";
     }
+
 
 }

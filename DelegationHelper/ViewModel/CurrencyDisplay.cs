@@ -10,23 +10,22 @@ namespace DelegationHelper.ViewModel
 {
     class CurrencyDisplay : INotifyPropertyChanged
     {
-        private CurrencyTable todaysCurrTable = null;
+        private CurrencyTable todaysCurrTable = new CurrencyTable();//dummy
         private Engine engine = null;
         public event PropertyChangedEventHandler PropertyChanged;
         public NotifyTaskCompletion<CurrencyTable> UrlByteCount { get; private set; }
 
         public CurrencyDisplay()
         {
-            engine = Engine.getEngine();
+            engine = Engine.GetInstance;
             Initializer();
         }
 
 
-        private  void Initializer()
+        private async void Initializer()
         {
-            //TodaysCurrTable = await NBPTableDownloader.getNBPCurrencyTable();
-            UrlByteCount = new NotifyTaskCompletion<CurrencyTable>(NBPTableDownloader.getNBPCurrencyTable());
-            TodaysCurrTable = UrlByteCount.Result;
+            TodaysCurrTable = await NBPTableDownloader.getNBPCurrencyTable();
+            //UrlByteCount = new NotifyTaskCompletion<CurrencyTable>(NBPTableDownloader.getNBPCurrencyTable());
         }
 
 
